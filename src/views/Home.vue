@@ -1,18 +1,19 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-02 17:36:33
+ * @LastEditTime: 2021-02-02 22:02:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \re-mall-vue\src\views\Home.vue
+-->
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    home
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
+  name: "Home"
 };
 </script>
