@@ -1,18 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-04 14:45:52
- * @LastEditTime: 2021-02-04 17:48:21
+ * @LastEditTime: 2021-02-05 00:03:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\tabbar\TabBar.vue
 -->
 <template>
   <div class="tab-bar space-average">
-    <!-- <div class="bar__item">首页</div>
-    <div class="bar__item">首页</div>
-    <div class="bar__item">首页</div>
-    <div class="bar__item">首页</div> -->
-
     <slot />
   </div>
 </template>
