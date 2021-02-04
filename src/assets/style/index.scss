@@ -45,4 +45,11 @@ a {
   float: right;
 }
 
+.space-average{
+  display: flex;
+  >div{
+    flex: 1;
+  }
+}
+
 
