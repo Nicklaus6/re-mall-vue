@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-05 12:23:24
- * @LastEditTime: 2021-02-05 14:30:34
+ * @LastEditTime: 2021-02-05 18:26:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\navbar\NavBar.vue
@@ -42,6 +42,9 @@ export default {
     height: 44px;
     line-height: 44px;
     text-align: center;
+    z-index: 999;
+    position: sticky;
+    top: 0;
   }
 }
 </style>

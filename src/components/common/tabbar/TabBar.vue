@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-04 14:45:52
- * @LastEditTime: 2021-02-05 00:03:38
+ * @LastEditTime: 2021-02-05 17:05:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\tabbar\TabBar.vue
