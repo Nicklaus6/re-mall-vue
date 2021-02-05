@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-04 17:51:42
- * @LastEditTime: 2021-02-05 00:19:02
+ * @LastEditTime: 2021-02-05 11:50:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\business\MainTabBar.vue
 -->
 <template>
   <tab-bar>
-    <tab-bar-item path="/home">
+    <tab-bar-item path="/home" activeColor="hotpink">
       <img slot="icon" src="@/assets/img/tabbar/home.svg" alt="" />
       <img
         slot="icon--active"

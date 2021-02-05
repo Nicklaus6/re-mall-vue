@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-04 14:46:02
- * @LastEditTime: 2021-02-04 23:56:16
+ * @LastEditTime: 2021-02-05 11:42:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\tabbar\TabBarItem.vue
@@ -14,7 +14,7 @@
     <div class="item__icon--active" v-show="isActive">
       <slot name="icon--active"></slot>
     </div>
-    <div class="item__text" :class="{ active: isActive }">
+    <div class="item__text" :style="activeStyle">
       <slot name="text"></slot>
     </div>
   </div>
@@ -23,18 +23,24 @@
 <script>
 export default {
   name: "TabBarItem",
-  data() {
-    return {
-      isActive: true
-    };
-  },
   props: {
-    path: String
+    path: String,
+    activeColor: {
+      type: String,
+      default: "#ff5777"
+    }
+  },
+  computed: {
+    isActive() {
+      return this.$route.path.indexOf(this.path) !== -1;
+    },
+    activeStyle() {
+      return this.isActive ? { color: this.activeColor } : {};
+    }
   },
   methods: {
     itemClick() {
       this.$router.replace(this.path);
-      console.log(this.$route.path);
     }
   }
 };
@@ -57,8 +63,8 @@ export default {
     margin-top: 3px;
     color: #333;
   }
-  &__text.active {
-    color: $color-high-text;
-  }
+  // &__text.active {
+  //   color: $color-high-text;
+  // }
 }
 </style>
