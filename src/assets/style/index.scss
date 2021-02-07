@@ -23,6 +23,12 @@ a {
   text-decoration: none;
 }
 
+// 隐藏滚动条
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 // 清除浮动
 .clearfix{
   zoom: 1;

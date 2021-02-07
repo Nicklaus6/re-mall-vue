@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-07 14:51:51
+ * @LastEditTime: 2021-02-07 16:07:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -12,20 +12,24 @@
       <div slot="middle">购物街</div>
     </nav-bar>
     <main-swiper class="home__swiper" :banners="banners"></main-swiper>
+    <home-feature></home-feature>
     <home-recommend></home-recommend>
+
     <all-tabs :titles="titles" :content="content">
-      <div class="div" v-for="(item, index) in 20" :key="item">{{ index }}</div>
+      <h1 class="div" v-for="(item, index) in 30" :key="item">{{ index }}</h1>
     </all-tabs>
   </div>
 </template>
 
 <script>
 import HomeRecommend from "./childComps/HomeRecommend";
+import HomeFeature from "./childComps/HomeFeature";
 
 export default {
   name: "Home",
   components: {
-    HomeRecommend
+    HomeRecommend,
+    HomeFeature
   },
 
   data() {
@@ -46,6 +50,7 @@ export default {
 .home {
   &__container {
     height: calc(100vh - 49px);
+    overflow-y: auto;
   }
 
   &__swiper {
