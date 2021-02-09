@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-07 16:07:44
+ * @LastEditTime: 2021-02-09 11:29:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -24,6 +24,7 @@
 <script>
 import HomeRecommend from "./childComps/HomeRecommend";
 import HomeFeature from "./childComps/HomeFeature";
+import { getHomeMultidata } from "@/api/home";
 
 export default {
   name: "Home",
@@ -43,6 +44,11 @@ export default {
       titles: ["流行", "新款", "精选"],
       content: ["流行", "新款", "精选"]
     };
+  },
+  created() {
+    getHomeMultidata().then(res => {
+      console.log(res);
+    });
   }
 };
 </script>
