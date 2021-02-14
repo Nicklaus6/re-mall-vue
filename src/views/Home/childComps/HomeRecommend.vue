@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-06 11:34:03
- * @LastEditTime: 2021-02-06 11:40:34
+ * @LastEditTime: 2021-02-14 19:55:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home\components\HomeRecommend.vue

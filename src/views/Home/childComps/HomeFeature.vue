@@ -1,17 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-07 15:55:27
- * @LastEditTime: 2021-02-07 16:06:15
+ * @LastEditTime: 2021-02-14 20:08:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home\childComps\HomeFeature.vue
 -->
 <template>
   <div class="home-feature space-average">
-    <div class="feature__item" v-for="(item, index) in 4" :key="item">
-      <a href="">
-        <img class="feature__img" src="@/assets/img/banner.png" alt="" />
-        <div class="feature__text">{{ index }}</div>
+    <div class="feature__item" v-for="feature in features" :key="feature.sort">
+      <a :href="feature.link">
+        <img class="feature__img" :src="feature.image" alt="" />
+        <div class="feature__text">{{ feature.title }}</div>
       </a>
     </div>
   </div>
@@ -19,7 +19,13 @@
 
 <script>
 export default {
-  name: "HomeFeature"
+  name: "HomeFeature",
+  props: {
+    features: {
+      type: Array,
+      default: () => []
+    }
+  }
 };
 </script>
 
@@ -27,7 +33,7 @@ export default {
 .home-feature {
   margin-top: 10px;
   font-size: 14px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   border-bottom: 10px solid #eee;
 }
 .feature {
@@ -35,9 +41,12 @@ export default {
     text-align: center;
   }
   &__img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     object-fit: fill;
+  }
+  &__text {
+    margin-top: 10px;
   }
 }
 </style>

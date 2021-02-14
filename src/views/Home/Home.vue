@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-14 19:49:48
+ * @LastEditTime: 2021-02-14 19:57:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -12,7 +12,7 @@
       <div slot="middle">购物街</div>
     </nav-bar>
     <main-swiper class="home__swiper" :banners="banners"></main-swiper>
-    <home-feature></home-feature>
+    <home-feature :features="recommends"></home-feature>
     <home-recommend></home-recommend>
 
     <all-tabs :titles="titles" :content="content">
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       banners: [],
+      recommends: [],
       titles: ["流行", "新款", "精选"],
       content: ["流行", "新款", "精选"]
     };
@@ -46,6 +47,7 @@ export default {
       getHomeMultidata().then(res => {
         console.log(res.data);
         this.banners = res.data.data.banner.list;
+        this.recommends = res.data.data.recommend.list;
       });
     }
   },
