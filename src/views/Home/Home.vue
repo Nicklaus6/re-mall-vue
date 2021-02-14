@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-09 11:29:19
+ * @LastEditTime: 2021-02-14 19:49:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -24,6 +24,7 @@
 <script>
 import HomeRecommend from "./childComps/HomeRecommend";
 import HomeFeature from "./childComps/HomeFeature";
+
 import { getHomeMultidata } from "@/api/home";
 
 export default {
@@ -35,20 +36,21 @@ export default {
 
   data() {
     return {
-      banners: [
-        "@/assets/img/banner.png",
-        "@/assets/img/banner.png",
-        "@/assets/img/banner.png",
-        "@/assets/img/banner.png"
-      ],
+      banners: [],
       titles: ["流行", "新款", "精选"],
       content: ["流行", "新款", "精选"]
     };
   },
+  methods: {
+    getMultidata() {
+      getHomeMultidata().then(res => {
+        console.log(res.data);
+        this.banners = res.data.data.banner.list;
+      });
+    }
+  },
   created() {
-    getHomeMultidata().then(res => {
-      console.log(res);
-    });
+    this.getMultidata();
   }
 };
 </script>
@@ -60,8 +62,7 @@ export default {
   }
 
   &__swiper {
-    background-color: pink;
-    height: 180px;
+    height: 200px;
   }
 }
 </style>

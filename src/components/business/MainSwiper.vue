@@ -1,15 +1,21 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-05 16:12:00
- * @LastEditTime: 2021-02-05 22:56:03
+ * @LastEditTime: 2021-02-14 19:40:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\swiper\swiper.vue
 -->
 <template>
-  <swiper ref="mySwiper" :options="swiperOptions">
-    <swiper-slide v-for="banner in banners" :key="banner">
-      <img src="banner" alt="" />
+  <swiper ref="mySwiper" :options="mergeSwiperOptions">
+    <swiper-slide
+      class="swiper-slide"
+      v-for="banner in banners"
+      :key="banner.title"
+    >
+      <a :href="banner.link">
+        <img class="swiper__img" :src="banner.image" alt="" />
+      </a>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
@@ -25,16 +31,21 @@ export default {
     banners: {
       type: Array,
       default: () => []
+    },
+    height: {
+      type: Number,
+      default: 100
     }
   },
   data() {
     return {
       swiperOptions: {
+        // height: 100,
         pagination: {
           el: ".swiper-pagination"
         },
         autoplay: {
-          delay: 1000,
+          delay: 2000,
           stopOnLastSlide: false,
           disableOnInteraction: true
         }
@@ -49,7 +60,16 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
+    },
+    mergeSwiperOptions() {
+      return {
+        ...this.swiperOptions,
+        height: this.height
+      };
     }
+  },
+  created() {
+    this.height;
   },
   mounted() {
     console.log("Current Swiper instance object", this.swiper);
@@ -62,6 +82,10 @@ export default {
 </script>
 
 <style lang="scss" scope>
+.swiper__img {
+  width: 100%;
+  height: 100%;
+}
 .swiper-pagination-bullet-active {
   background-color: #d43e2e;
 }
