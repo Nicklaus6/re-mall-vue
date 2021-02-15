@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-14 19:57:11
+ * @LastEditTime: 2021-02-15 20:33:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -15,21 +15,30 @@
     <home-feature :features="recommends"></home-feature>
     <home-recommend></home-recommend>
 
-    <all-tabs :titles="titles" :content="content">
+    <!-- <all-tabs :titles="titles" :content="content">
       <h1 class="div" v-for="(item, index) in 30" :key="item">{{ index }}</h1>
-    </all-tabs>
+    </all-tabs> -->
+
+    <tabs class="all__tabs" height="40px" color="red">
+      <tab :title="item.title" v-for="item in goodsList" :key="item.type">
+        <good-list :goods-list="showGoodList(item.type)"></good-list>
+      </tab>
+    </tabs>
   </div>
 </template>
 
 <script>
+import { tabs, tab } from "vant";
 import HomeRecommend from "./childComps/HomeRecommend";
 import HomeFeature from "./childComps/HomeFeature";
 
-import { getHomeMultidata } from "@/api/home";
+import { getHomeMultidata, getHomeGoods } from "@/api/home";
 
 export default {
   name: "Home",
   components: {
+    tabs,
+    tab,
     HomeRecommend,
     HomeFeature
   },
@@ -38,21 +47,43 @@ export default {
     return {
       banners: [],
       recommends: [],
-      titles: ["流行", "新款", "精选"],
-      content: ["流行", "新款", "精选"]
+      goodsList: [
+        { type: "pop", page: 1, list: [], title: "流行" },
+        { type: "new", page: 1, list: [], title: "新款" },
+        { type: "sell", page: 1, list: [], title: "精选" }
+      ]
     };
   },
+  computed: {},
   methods: {
     getMultidata() {
       getHomeMultidata().then(res => {
-        console.log(res.data);
-        this.banners = res.data.data.banner.list;
-        this.recommends = res.data.data.recommend.list;
+        let data = res.data.data;
+
+        this.banners = data.banner.list;
+        this.recommends = data.recommend.list;
+      });
+    },
+
+    showGoodList(type) {
+      return this.goodsList.find(element => element.type === type).list;
+    },
+
+    getGoods(type) {
+      let currentType = this.goodsList.find(element => element.type === type);
+      getHomeGoods(type, currentType.page).then(res => {
+        const goodsList = res.data.data.list;
+        currentType.page += 1;
+        currentType.list.push(...goodsList);
       });
     }
   },
   created() {
     this.getMultidata();
+
+    this.getGoods("pop");
+    this.getGoods("new");
+    this.getGoods("sell");
   }
 };
 </script>
