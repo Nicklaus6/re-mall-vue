@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-15 15:45:59
- * @LastEditTime: 2021-02-16 15:00:22
+ * @LastEditTime: 2021-02-16 21:53:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\business\goods\GoodList..vue
@@ -9,8 +9,8 @@
 <template>
   <div class="good-list">
     <goods-list-item
-      v-for="good in goodsList"
-      :key="good.iid"
+      v-for="(good, index) in goodsList"
+      :key="index + good.iid"
       :good="good"
     ></goods-list-item>
   </div>

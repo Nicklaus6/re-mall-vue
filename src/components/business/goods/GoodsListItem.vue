@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-15 21:01:43
- * @LastEditTime: 2021-02-16 16:12:18
+ * @LastEditTime: 2021-02-16 21:54:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\business\goods\GoodListItem.vue
