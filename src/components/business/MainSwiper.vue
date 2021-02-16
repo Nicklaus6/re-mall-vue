@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-05 16:12:00
- * @LastEditTime: 2021-02-14 19:40:35
+ * @LastEditTime: 2021-02-16 16:20:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\components\common\swiper\swiper.vue
@@ -14,7 +14,7 @@
       :key="banner.title"
     >
       <a :href="banner.link">
-        <img class="swiper__img" :src="banner.image" alt="" />
+        <img class="swiper__img" v-lazy="banner.image" alt="" />
       </a>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
