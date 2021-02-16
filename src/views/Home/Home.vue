@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-16 15:12:16
+ * @LastEditTime: 2021-02-16 17:05:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -15,7 +15,13 @@
     <home-feature :features="recommends"></home-feature>
     <home-recommend></home-recommend>
 
-    <tabs class="all__tabs" height="40px" color="red">
+    <tabs
+      class="home__tabs"
+      title-active-color="#ff5777"
+      color="#ff8198"
+      sticky="true"
+      offset-top="44"
+    >
       <tab :title="item.title" v-for="item in goodsList" :key="item.type">
         <goods-list :goods-list="showGoodList(item.type)"></goods-list>
       </tab>

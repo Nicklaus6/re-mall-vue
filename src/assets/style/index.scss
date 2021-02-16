@@ -65,4 +65,7 @@ a {
   white-space: nowrap;
 }
 
-
+// 覆盖 vant 组件库样式
+.van-tabs .van-tabs__line {
+  bottom: 20px;
+}
