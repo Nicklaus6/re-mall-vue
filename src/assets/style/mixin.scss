@@ -5,3 +5,12 @@
   align-items: $align;
   flex-wrap: $wrap;
 }
+@mixin layoutNColumns($width:48%){
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  >div{
+    width:$width
+  }
+}

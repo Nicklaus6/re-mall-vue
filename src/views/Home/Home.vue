@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-15 20:33:44
+ * @LastEditTime: 2021-02-16 15:12:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -15,13 +15,9 @@
     <home-feature :features="recommends"></home-feature>
     <home-recommend></home-recommend>
 
-    <!-- <all-tabs :titles="titles" :content="content">
-      <h1 class="div" v-for="(item, index) in 30" :key="item">{{ index }}</h1>
-    </all-tabs> -->
-
     <tabs class="all__tabs" height="40px" color="red">
       <tab :title="item.title" v-for="item in goodsList" :key="item.type">
-        <good-list :goods-list="showGoodList(item.type)"></good-list>
+        <goods-list :goods-list="showGoodList(item.type)"></goods-list>
       </tab>
     </tabs>
   </div>
