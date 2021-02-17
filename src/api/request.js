@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-09 10:19:26
- * @LastEditTime: 2021-02-16 17:55:49
+ * @LastEditTime: 2021-02-17 12:15:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\api\request.js
@@ -27,6 +27,7 @@ request.interceptors.response.use(
   },
   err => {
     console.log("来到了response拦截failure中");
+    console.log(request.timeout);
     return Promise.reject(err);
   }
 );

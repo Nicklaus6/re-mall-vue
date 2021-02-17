@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-16 21:12:34
+ * @LastEditTime: 2021-02-17 12:35:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \re-mall-vue\src\views\Home.vue
@@ -24,9 +24,12 @@
     >
       <tab :title="item.title" v-for="item in goodsList" :key="item.type">
         <list
+          v-model="loading"
           :finished="finished"
           finished-text="没有更多啦😅😅"
           @load="onLoad(item.type)"
+          :error.sync="error"
+          error-text="请求失败，点击重新加载"
         >
           <!-- <goods-list-item
             v-for="(good, index) in goodsList"
@@ -67,6 +70,7 @@ export default {
 
       loading: false,
       finished: false,
+      error: false,
 
       goodsList: [
         { type: "pop", page: 1, list: [], title: "流行" },
@@ -108,11 +112,18 @@ export default {
           currentType.list.push(...goodsList);
         })
         .catch(err => {
-          console.log(err.response);
+          console.log(err.message);
+
+          // 列表数据加载失败
+          if (err.message.indexOf("timeout") !== -1) {
+            this.error = true;
+          }
+
           // 数据全部加载完成
-          if (err.response.status === 500) {
+          if (err.response && err.response.status === 500) {
             this.finished = true;
           }
+
           return err;
         });
     }
