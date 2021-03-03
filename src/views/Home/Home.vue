@@ -1,52 +1,58 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-02 17:36:33
- * @LastEditTime: 2021-02-17 12:35:59
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \re-mall-vue\src\views\Home.vue
--->
 <template>
   <div class="home__container">
     <nav-bar class="home__nav">
       <div slot="middle">购物街</div>
     </nav-bar>
-    <main-swiper class="home__swiper" :banners="banners"></main-swiper>
-    <home-feature :features="recommends"></home-feature>
-    <home-recommend></home-recommend>
 
-    <tabs
-      class="home__tabs"
-      title-active-color="#ff5777"
-      color="#ff8198"
-      :sticky="true"
-      offset-top="44"
+    <pull-refresh
+      v-model="refreshing"
+      @refresh="onRefresh()"
+      success-text="刷新成功哒~"
     >
-      <tab :title="item.title" v-for="item in goodsList" :key="item.type">
-        <list
-          v-model="loading"
-          :finished="finished"
-          finished-text="没有更多啦😅😅"
-          @load="onLoad(item.type)"
-          :error.sync="error"
-          error-text="请求失败，点击重新加载"
+      <main-swiper class="home__swiper" :banners="banners"></main-swiper>
+      <home-feature :features="recommends"></home-feature>
+      <home-recommend></home-recommend>
+
+      <tabs
+        class="home__tabs"
+        title-active-color="#ff5777"
+        color="#ff8198"
+        :sticky="true"
+        offset-top="44"
+        @click="tabClick"
+      >
+        <tab
+          :title="item.title"
+          v-for="item in goodsList"
+          :key="item.type"
+          :currentType="item.type"
         >
-          <!-- <goods-list-item
+          <list
+            v-model="loading"
+            :finished="finished"
+            loading-text="加载中~"
+            finished-text="没有更多啦😅😅"
+            @load="onLoad()"
+            :error.sync="error"
+            error-text="请求失败，点击重新加载"
+          >
+            <!-- <goods-list-item
             v-for="(good, index) in goodsList"
             :key="index + good.iid"
             :good="good"
           >
           </goods-list-item> -->
 
-          <goods-list :goods-list="showGoodList(item.type)"></goods-list>
-        </list>
-      </tab>
-    </tabs>
+            <goods-list :goods-list="showGoodList()"></goods-list>
+          </list>
+        </tab>
+      </tabs>
+    </pull-refresh>
   </div>
 </template>
 
 <script>
-import { Tabs, Tab, List } from "vant";
+import { Tabs, Tab, List, PullRefresh } from "vant";
 import HomeRecommend from "./childComps/HomeRecommend";
 import HomeFeature from "./childComps/HomeFeature";
 
@@ -58,11 +64,11 @@ export default {
     Tabs,
     Tab,
     List,
+    PullRefresh,
 
     HomeRecommend,
     HomeFeature
   },
-
   data() {
     return {
       banners: [],
@@ -71,6 +77,10 @@ export default {
       loading: false,
       finished: false,
       error: false,
+      refreshing: false,
+
+      currentTabIndex: 0,
+      currentTabType: "pop",
 
       goodsList: [
         { type: "pop", page: 1, list: [], title: "流行" },
@@ -81,16 +91,47 @@ export default {
   },
   computed: {},
   methods: {
-    onLoad(type) {
+    onLoad() {
+      // 刷新数据
+      if (this.refreshing) {
+        this.goodsList.forEach(item => {
+          item.list = [];
+        });
+
+        this.refreshing = false;
+      }
+
       // 异步更新数据
-      this.getGoods(type);
+      this.getGoods("pop");
+      this.getGoods("new");
+      this.getGoods("sell");
 
       // 加载状态结束
       this.loading = false;
+
+      // 数据全部加载完成
+      // if (this.list.length >= 40) {
+      //   this.finished = true;
+      // }
     },
 
-    showGoodList(type) {
-      return this.goodsList.find(element => element.type === type).list;
+    onRefresh() {
+      // 清空列表数据
+      this.finished = false;
+
+      // 重新加载数据
+      // 将 loading 设置为 true,表示处于加载状态
+      this.loading = true;
+      this.onLoad();
+    },
+
+    tabClick(name, currentType) {
+      this.currentTabIndex = name;
+      this.currentTabType = currentType;
+    },
+
+    showGoodList() {
+      return this.goodsList[this.currentTabIndex].list;
     },
 
     // 获取接口数据
@@ -104,12 +145,14 @@ export default {
     },
 
     getGoods(type) {
-      let currentType = this.goodsList.find(element => element.type === type);
-      getHomeGoods(type, currentType.page)
+      let currentItem = this.goodsList.find(element => element.type === type);
+
+      getHomeGoods(type, currentItem.page)
         .then(res => {
           const goodsList = res.data.data.list;
-          currentType.page += 1;
-          currentType.list.push(...goodsList);
+
+          currentItem.list.push(...goodsList);
+          currentItem.page += 1;
         })
         .catch(err => {
           console.log(err.message);
@@ -123,17 +166,24 @@ export default {
           if (err.response && err.response.status === 500) {
             this.finished = true;
           }
-
           return err;
         });
     }
   },
+
   created() {
     this.getMultidata();
 
     this.getGoods("pop");
     this.getGoods("new");
     this.getGoods("sell");
+  },
+  deactivated() {},
+  mounted() {
+    console.log("home mounted");
+  },
+  destroyed() {
+    console.log("home destoryed");
   }
 };
 </script>
