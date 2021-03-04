@@ -1,5 +1,5 @@
 <template>
-  <div class="home__container">
+  <div class="home__container" ref="home">
     <nav-bar class="home__nav">
       <div slot="middle">购物街</div>
     </nav-bar>
@@ -48,6 +48,9 @@
         </tab>
       </tabs>
     </pull-refresh>
+    <back-top class="back-top" v-show="showBackTop" @click.native="backTop">
+      <img src="@/assets/img/common/top.png" alt="" />
+    </back-top>
   </div>
 </template>
 
@@ -73,23 +76,28 @@ export default {
     return {
       banners: [],
       recommends: [],
+      goodsList: [
+        { type: "pop", page: 1, list: [], title: "流行" },
+        { type: "new", page: 1, list: [], title: "新款" },
+        { type: "sell", page: 1, list: [], title: "精选" }
+      ],
+
+      currentTabIndex: 0,
+      currentTabType: "pop",
 
       loading: false,
       finished: false,
       error: false,
       refreshing: false,
 
-      currentTabIndex: 0,
-      currentTabType: "pop",
-
-      goodsList: [
-        { type: "pop", page: 1, list: [], title: "流行" },
-        { type: "new", page: 1, list: [], title: "新款" },
-        { type: "sell", page: 1, list: [], title: "精选" }
-      ]
+      scrollTop: 0
     };
   },
-  computed: {},
+  computed: {
+    showBackTop() {
+      return this.scrollTop > 300 || this.scrollTop > 300;
+    }
+  },
   methods: {
     onLoad() {
       // 刷新数据
@@ -114,7 +122,6 @@ export default {
       //   this.finished = true;
       // }
     },
-
     onRefresh() {
       // 清空列表数据
       this.finished = false;
@@ -134,6 +141,11 @@ export default {
       return this.goodsList[this.currentTabIndex].list;
     },
 
+    backTop() {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    },
+
     // 获取接口数据
     getMultidata() {
       getHomeMultidata().then(res => {
@@ -143,7 +155,6 @@ export default {
         this.recommends = data.recommend.list;
       });
     },
-
     getGoods(type) {
       let currentItem = this.goodsList.find(element => element.type === type);
 
@@ -181,9 +192,19 @@ export default {
   deactivated() {},
   mounted() {
     console.log("home mounted");
+
+    window.addEventListener("scroll", () => {
+      this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    });
   },
   destroyed() {
     console.log("home destoryed");
+
+    window.removeEventListener("scroll", () => {
+      this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    });
   }
 };
 </script>
@@ -191,12 +212,17 @@ export default {
 <style lang="scss" scope>
 .home {
   &__container {
-    height: calc(100vh - 49px);
-    overflow-y: auto;
+    height: calc(100% - 49px);
+    // overflow-y: auto;  设置overflow会让 sticky 失效
   }
 
   &__swiper {
     height: 200px;
   }
+}
+.back-top {
+  position: fixed;
+  bottom: 46px;
+  right: 8px;
 }
 </style>
