@@ -48,8 +48,14 @@
         </tab>
       </tabs>
     </pull-refresh>
-    <back-top class="back-top" v-show="showBackTop" @click.native="backTop">
-      <img src="@/assets/img/common/top.png" alt="" />
+    <back-top
+      class="back-top"
+      imgWidth="43px"
+      imgHeight="43px"
+      :backTopImg="require(`@/assets/img/common/top.png`)"
+      :show="350"
+      :speed="6"
+    >
     </back-top>
   </div>
 </template>
@@ -88,15 +94,8 @@ export default {
       loading: false,
       finished: false,
       error: false,
-      refreshing: false,
-
-      scrollTop: 0
+      refreshing: false
     };
-  },
-  computed: {
-    showBackTop() {
-      return this.scrollTop > 300 || this.scrollTop > 300;
-    }
   },
   methods: {
     onLoad() {
@@ -139,11 +138,6 @@ export default {
 
     showGoodList() {
       return this.goodsList[this.currentTabIndex].list;
-    },
-
-    backTop() {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
     },
 
     // 获取接口数据
@@ -192,19 +186,9 @@ export default {
   deactivated() {},
   mounted() {
     console.log("home mounted");
-
-    window.addEventListener("scroll", () => {
-      this.scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-    });
   },
   destroyed() {
     console.log("home destoryed");
-
-    window.removeEventListener("scroll", () => {
-      this.scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-    });
   }
 };
 </script>
