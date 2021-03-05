@@ -183,12 +183,24 @@ export default {
     this.getGoods("new");
     this.getGoods("sell");
   },
-  deactivated() {},
   mounted() {
     console.log("home mounted");
   },
   destroyed() {
     console.log("home destoryed");
+  },
+  beforeRouteLeave(to, from, next) {
+    let scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop;
+    this.$store.commit("scrollChange", scrollTop);
+    next();
+  },
+  activated() {
+    this.$nextTick(function() {
+      scrollTo(0, this.$store.state.scrollTop);
+    });
   }
 };
 </script>
