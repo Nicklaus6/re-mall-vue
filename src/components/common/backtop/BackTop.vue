@@ -2,8 +2,11 @@
   <div class="back-top" @click="backTop(speed)">
     <img
       :class="{ show: scrollTop > show }"
-      :src="backTopImg"
-      :style="{ width: imgWidth, height: imgHeight }"
+      :style="{
+        width: imgWidth,
+        height: imgHeight
+      }"
+      v-lazy="backTopImg"
       alt=""
     />
   </div>
@@ -57,7 +60,10 @@ export default {
     });
   },
   destroyed() {
-    window.removeEventListener("scroll");
+    window.removeEventListener("scroll", () => {
+      this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    });
   }
 };
 </script>
