@@ -1,20 +1,18 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-05 16:12:00
- * @LastEditTime: 2021-02-16 16:20:07
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \re-mall-vue\src\components\common\swiper\swiper.vue
--->
 <template>
-  <swiper ref="mySwiper" :options="mergeSwiperOptions">
+  <swiper class="swiper" ref="mySwiper" :options="mergeSwiperOptions">
     <swiper-slide
       class="swiper-slide"
       v-for="banner in banners"
       :key="banner.title"
     >
       <a :href="banner.link">
-        <img class="swiper__img" v-lazy="banner.image" alt="" />
+        <img
+          class="swiper__img"
+          v-lazy="banner.image"
+          :width="banner.width"
+          :height="banner.height"
+          alt=""
+        />
       </a>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
@@ -31,16 +29,11 @@ export default {
     banners: {
       type: Array,
       default: () => []
-    },
-    height: {
-      type: Number,
-      default: 100
     }
   },
   data() {
     return {
       swiperOptions: {
-        // height: 100,
         pagination: {
           el: ".swiper-pagination"
         },
@@ -68,11 +61,8 @@ export default {
       };
     }
   },
-  created() {
-    this.height;
-  },
   mounted() {
-    console.log("Current Swiper instance object", this.swiper);
+    // console.log("Current Swiper instance object", this.swiper);
     this.swiper.slideTo(0, 1000, false);
   },
   directives: {
@@ -82,11 +72,16 @@ export default {
 </script>
 
 <style lang="scss" scope>
-.swiper__img {
+.swiper {
   width: 100%;
   height: 100%;
-}
-.swiper-pagination-bullet-active {
-  background-color: #d43e2e;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+  &-pagination-bullet-active {
+    background-color: #d43e2e;
+  }
 }
 </style>

@@ -1,14 +1,6 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-15 21:01:43
- * @LastEditTime: 2021-02-16 21:54:23
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \re-mall-vue\src\components\business\goods\GoodListItem.vue
--->
 <template>
   <div class="good">
-    <img class="good__img" v-lazy="good.show.img" alt="" />
+    <img class="good__img" v-lazy="good.show.img" :width="good.show.w" alt="" />
     <div class="good__info ">
       <p class="good__title text-ellipsis">{{ good.title }}</p>
       <span class="good__price">￥{{ good.price }}</span>

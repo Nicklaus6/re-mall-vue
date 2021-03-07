@@ -1,15 +1,7 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-06 11:34:03
- * @LastEditTime: 2021-02-14 19:55:29
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \re-mall-vue\src\views\Home\components\HomeRecommend.vue
--->
 <template>
   <div class="home-recommend">
     <a href="http://act.mogujie.com/zzlx67">
-      <img src="@/assets/img/home/recommend_bg.jpg" alt="" />
+      <img src="@/assets/img/home/recommend_bg.jpg" width="740" alt="" />
     </a>
   </div>
 </template>

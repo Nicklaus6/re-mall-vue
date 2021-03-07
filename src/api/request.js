@@ -27,7 +27,6 @@ request.interceptors.response.use(
   },
   err => {
     console.log("来到了response拦截failure中");
-    console.log(request.timeout);
     return Promise.reject(err);
   }
 );

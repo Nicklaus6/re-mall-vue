@@ -11,3 +11,12 @@
     <h1>This is an category page</h1>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Category",
+  mounted() {
+    console.log("category");
+  }
+};
+</script>

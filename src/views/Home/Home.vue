@@ -212,9 +212,9 @@ export default {
     // overflow-y: auto;  设置overflow会让 sticky 失效
   }
 
-  &__swiper {
-    height: 200px;
-  }
+  // &__swiper {
+  //   height: 200px;
+  // }
 }
 .back-top {
   position: fixed;

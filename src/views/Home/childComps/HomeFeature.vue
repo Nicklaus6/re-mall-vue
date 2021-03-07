@@ -1,16 +1,14 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-07 15:55:27
- * @LastEditTime: 2021-02-16 16:21:59
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \re-mall-vue\src\views\Home\childComps\HomeFeature.vue
--->
 <template>
   <div class="home-feature space-average">
     <div class="feature__item" v-for="feature in features" :key="feature.sort">
       <a :href="feature.link">
-        <img class="feature__img" :src="feature.image" alt="" />
+        <img
+          class="feature__img"
+          :src="feature.image"
+          width="70"
+          height="70"
+          alt=""
+        />
         <div class="feature__text">{{ feature.title }}</div>
       </a>
     </div>
