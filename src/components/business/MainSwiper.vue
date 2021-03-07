@@ -8,7 +8,7 @@
       <a :href="banner.link">
         <img
           class="swiper__img"
-          v-lazy="banner.image"
+          :src="banner.image"
           :width="banner.width"
           :height="banner.height"
           alt=""
